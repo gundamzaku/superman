@@ -26,7 +26,7 @@ func main() {
 			//判断类型
 			//执行PHP脚本
 			//cmd := exec.Command("php", "/data/www/wei/script/test.php")
-			cmd:= exec.Command("ps","-ef","|grep queue")
+			cmd:= exec.Command("ps","-ef|grep","queue")
 			cmd.Stderr = os.Stderr
 			cmd.Stdout = os.Stdout
 			err = cmd.Run()
