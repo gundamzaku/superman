@@ -28,6 +28,7 @@ func main() {
 			//cmd := exec.Command("php", "/data/www/wei/script/test.php")
 			cmd:= exec.Command("/bin/sh", "-c", `ps -ef | grep -v "grep" | grep "queue"`)
 			cmd.Stderr = os.Stdout
+			cmd.Stderr = os.Stderr
 			err := cmd.Run()
 			if err != nil {
 				fmt.Println(err)
