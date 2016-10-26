@@ -30,10 +30,11 @@ func main() {
 			cmd:= exec.Command(`ps`)
 			cmd.Stderr = os.Stdout
 			cmd.Stderr = os.Stderr
+			/*
 			err := cmd.Run()
 			if err != nil {
 				fmt.Println(err)
-			}
+			}*/
 
 			buf,err := cmd.Output()
 			if(err != nil){
