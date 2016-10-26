@@ -7,7 +7,6 @@ import (
 	"time"
 	"os/exec"
 	"os"
-	"io/ioutil"
 )
 
 func main() {
