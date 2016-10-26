@@ -24,7 +24,7 @@ func main() {
 			fmt.Println(id)
 			//判断类型
 			//执行PHP脚本
-			f, err := exec.Command("ls", "/").Output()
+			f, err := exec.Command("php", "/data/www/wei/script/test.php").Output()
 			if err != nil {
 				fmt.Println(err)
 			}
