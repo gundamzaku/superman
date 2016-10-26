@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"time"
-	"go/types"
 	"os/exec"
 )
 
