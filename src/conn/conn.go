@@ -2,7 +2,7 @@ package conn
 
 import (
 	"database/sql"
-	_ "github.com/Go-SQL-Driver/mysql"
+	_ "github.com/go-sql-driver/mysql"
 	"log"
 )
 
