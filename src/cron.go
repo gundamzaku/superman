@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"time"
+	"go/types"
+	"os/exec"
 )
 
 func main() {
@@ -22,7 +24,13 @@ func main() {
 			rows.Scan(&id, &title)
 			fmt.Println(id)
 			//判断类型
+			//执行PHP脚本
+			f, err := exec.Command("ls", "/").Output()
+			if err != nil {
+				fmt.Println(err)
+			}
+			fmt.Println(f)
 		}
-		time.Sleep(2 * time.Second)
+		time.Sleep(5 * time.Second)
 	}
 }
