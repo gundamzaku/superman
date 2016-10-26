@@ -27,11 +27,18 @@ func main() {
 			//执行PHP脚本
 			//cmd := exec.Command("php", "/data/www/wei/script/test.php")
 			cmd:= exec.Command("/bin/sh", "-c", `ps -ef | grep -v "grep" | grep "queue"`)
+			cmd.Stderr = os.Stdout
+			err := cmd.Run()
+			if err != nil {
+				fmt.Println(err)
+			}
+			/*
 			buf,err := cmd.Output()
 			if(err != nil){
 				fmt.Println(err)
 			}
 			fmt.Fprintf(os.Stdout, "Result: %s", buf)
+			*/
 		}
 		time.Sleep(5 * time.Second)
 	}
