@@ -34,13 +34,13 @@ func main() {
 			if err != nil {
 				fmt.Println(err)
 			}
-			/*
+
 			buf,err := cmd.Output()
 			if(err != nil){
 				fmt.Println(err)
 			}
 			fmt.Fprintf(os.Stdout, "Result: %s", buf)
-			*/
+
 		}
 		time.Sleep(5 * time.Second)
 	}
