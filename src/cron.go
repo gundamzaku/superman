@@ -10,24 +10,26 @@ import (
 )
 
 func main() {
-	db := conn.Conn()
+	//要改成读文件
+	//db := conn.Conn()
 	for {
+		/*
 		rows, err := db.Query("select id,title from cron")
 		if err != nil {
 			log.Fatalf("Connect table cron error: %s\n", err)
-		}
-		var id int64
-		var title string
+		}*/
+		//var id int64
+		//var title string
 
-		for rows.Next() {
+		//for rows.Next() {
 			//数据
-			rows.Scan(&id, &title)
-			fmt.Println(id)
+			//rows.Scan(&id, &title)
+			//fmt.Println(id)
 			//判断类型
 			//执行PHP脚本
 			//cmd := exec.Command("php", "/data/www/wei/script/test.php")
 			//cmd:= exec.Command(`ps -ef | grep -v "grep" | grep "queue"`)
-			cmd:= exec.Command("/bin/sh", "-c",`ps -ef |grep -v "grep" |grep "mysqld_safe"`)
+			cmd:= exec.Command("/bin/sh", "-c",`ps -ef |grep -v "grep" |grep "batch_qmfx_order"`)
 			cmd.Stderr = os.Stdout
 			cmd.Stderr = os.Stderr
 
@@ -42,9 +44,14 @@ func main() {
 
 			//执行可以执行的任务
 			runCmd := exec.Command("php", "/data/www/wei/script/batch_qmfx_order.php")
-			runCmd.Output()
-
-		}
-		time.Sleep(5 * time.Second)
+			runCmd.Stderr = os.Stdout
+			runCmd.Stderr = os.Stderr
+			buf,err = runCmd.Output()
+			if(err != nil){
+				fmt.Println(err)
+			}
+			fmt.Fprintf(os.Stdout, "Result: %s", buf)
+		//}
+		time.Sleep(50 * time.Second)
 	}
 }
