@@ -1,9 +1,7 @@
 package main
 
 import (
-	"conn"
 	"fmt"
-	"log"
 	"time"
 	"os/exec"
 	"os"
