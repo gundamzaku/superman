@@ -30,17 +30,19 @@ func main() {
 			cmd:= exec.Command("/bin/sh", "-c",`ps -ef |grep -v "grep" |grep "mysqld_safe"`)
 			cmd.Stderr = os.Stdout
 			cmd.Stderr = os.Stderr
-			/*
-			err := cmd.Run()
-			if err != nil {
-				fmt.Println(err)
-			}*/
 
 			buf,err := cmd.Output()
 			if(err != nil){
 				fmt.Println(err)
 			}
 			fmt.Fprintf(os.Stdout, "Result: %s", buf)
+			//需要确认是否有这个进程，有的话中断。
+
+			//还要判断一下数据库里的数据是否匹配
+
+			//执行可以执行的任务
+			runCmd := exec.Command("php", "/data/www/wei/script/batch_qmfx_order.php")
+			runCmd.Output()
 
 		}
 		time.Sleep(5 * time.Second)
