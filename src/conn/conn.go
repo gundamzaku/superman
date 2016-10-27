@@ -7,7 +7,7 @@ import (
 )
 
 func Conn() *sql.DB {
-	db, err := sql.Open("mysql", "liudan:liudan123@tcp(192.168.10.159:3306)/weidaogou")
+	db, err := sql.Open("mysql", "liudan:liudan123@tcp(127.0.0.1:3306)/weidaogou")
 	//连接不上，报错
 	if err != nil {
 		log.Fatalf("Open database error: %s\n", err)
