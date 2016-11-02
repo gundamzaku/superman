@@ -95,6 +95,7 @@ func main() {
 			continue
 		} else {
 			//继续执行下去
+			fmt.Println("exec: %s",v.Svs[i].CronPath + v.Svs[i].CronName)
 			runCmd := exec.Command(v.Svs[i].CronBash, v.Svs[i].CronPath + v.Svs[i].CronName)
 			runCmd.Stderr = os.Stdout
 			runCmd.Stderr = os.Stderr
