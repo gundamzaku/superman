@@ -9,6 +9,7 @@ import (
 	"time"
 	"regexp"
 	"os/exec"
+	"strings"
 )
 
 type Recurlyservers struct {
@@ -85,9 +86,7 @@ func main() {
 
 		//查找是否在进程中存在该程序
 		s := byteString(buf)
-		fmt.Println(s)
-		rs := false
-		//rs := strings.Contains(buf,v.Svs[i].CronName)
+		rs := strings.Contains(s,v.Svs[i].CronName)
 		if (rs == true) {
 			//此次不执行
 			fmt.Println("The process is running now")
