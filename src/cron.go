@@ -6,7 +6,6 @@ import (
 	"log"
 	"encoding/xml"
 	"io/ioutil"
-	"strings"
 	"time"
 	"regexp"
 	"os/exec"
