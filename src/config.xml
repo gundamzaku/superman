@@ -3,7 +3,7 @@
     <cron>
         <cronId>batch_qmfx_order</cronId>
         <cronDesc>这是用来跑订单脚本的，将全民分销的数据导到朋客订单数据中去</cronDesc>
-        <cronBash>batch_qmfx_order</cronBash>
+        <cronBash>php</cronBash>
         <cronPath>/data/www/wei/script/</cronPath>
         <cronName>batch_qmfx_order.php</cronName>
         <cronInterval>5</cronInterval><!--执行的时间间隔-->

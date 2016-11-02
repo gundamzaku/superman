@@ -104,7 +104,7 @@ func main() {
 				fmt.Println(err)
 			}
 			fmt.Fprintf(os.Stdout, "Result: %s", buf)
-			time.Sleep(50 * time.Second)
+			time.Sleep(TIMESLEEPINTERVAL * time.Second)
 		}
 	}
 
