@@ -84,6 +84,7 @@ func main() {
 		//**********
 
 		//查找是否在进程中存在该程序
+		/*
 		rs := strings.Contains(buf,v.Svs[i].CronName)
 		if(rs == true){
 			//此次不执行
@@ -101,7 +102,7 @@ func main() {
 			}
 			fmt.Fprintf(os.Stdout, "Result: %s", buf)
 			time.Sleep(50 * time.Second)
-		}
+		}*/
 	}
 
 	/*
