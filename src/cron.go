@@ -19,17 +19,18 @@ type Recurlyservers struct {
 	Description string   `xml:",innerxml"`
 }
 type cron struct {
-	XMLName    xml.Name `xml:"cron"`
-	CronId string   `xml:"cronId"`
-	CronDesc string   `xml:"cronDesc"`
-	CronBash string   `xml:"cronBash"`
-	CronPath   string   `xml:"cronPath"`
-	CronName   string   `xml:"cronName"`
-	CronInterval	int		`xml:"cronInterval"`
+	XMLName      xml.Name `xml:"cron"`
+	CronId       string   `xml:"cronId"`
+	CronDesc     string   `xml:"cronDesc"`
+	CronBash     string   `xml:"cronBash"`
+	CronPath     string   `xml:"cronPath"`
+	CronName     string   `xml:"cronName"`
+	CronInterval int        `xml:"cronInterval"`
 }
+
 var commondString string
 
-const TIMESLEEPINTERVAL  = 5
+const TIMESLEEPINTERVAL = 5
 // 先声明map
 var mContainer map[string]int32
 
@@ -38,26 +39,26 @@ func main() {
 	mContainer = make(map[string]int32)
 	//要改成读文件
 	args := os.Args
-	fmt.Println("read file who's name is %s",args[1])
+	fmt.Println("read file who's name is %s", args[1])
 	inputFile, inputError := os.Open(args[1])//变量指向os.Open打开的文件时生成的文件句柄
-	if inputError!=nil {
-		log.Fatalf("Read File error:%s",inputError)
+	if inputError != nil {
+		log.Fatalf("Read File error:%s", inputError)
 	}
 	xmlData, err := ioutil.ReadAll(inputFile)
-	if(err!=nil){
-		log.Fatalf("Read Xml error:%s",err)
+	if (err != nil) {
+		log.Fatalf("Read Xml error:%s", err)
 	}
 	v := Recurlyservers{}
-	xml.Unmarshal(xmlData,&v)
-	inputFile.Close()	//关闭文件
-	if len(v.Svs) == 0{
+	xml.Unmarshal(xmlData, &v)
+	inputFile.Close()    //关闭文件
+	if len(v.Svs) == 0 {
 		log.Fatalf("No script need to run……")
 	}
 
-	for i:=0; i<len(v.Svs);i++  {
+	for i := 0; i < len(v.Svs); i++ {
 
 		//CronId必须存在
-		if v.Svs[i].CronId == ""{
+		if v.Svs[i].CronId == "" {
 			fmt.Println("CronId didn't null……")
 			time.Sleep(TIMESLEEPINTERVAL * time.Second)
 			continue
@@ -65,41 +66,41 @@ func main() {
 		//CronId必须为字母数字
 		fmt.Println(v.Svs[i].CronId)
 		reg, _ := regexp.Compile(`[^a-zA-Z0-9_]`)
-		if len(reg.FindAllString(v.Svs[i].CronId,-1)) >0 {
+		if len(reg.FindAllString(v.Svs[i].CronId, -1)) > 0 {
 			fmt.Println("CronId must range [a-zA-Z0-9_]……")
 			time.Sleep(TIMESLEEPINTERVAL * time.Second)
 			continue
 		}
 		fmt.Println("regexp is pass")
 		//**********
-		cmd:= exec.Command("/bin/sh", "-c",`ps -ef |grep -v "grep" |grep "`+v.Svs[i].CronName+`"`)
+		cmd := exec.Command("/bin/sh", "-c", `ps -ef |grep -v "grep" |grep "` + v.Svs[i].CronName + `"`)
 		cmd.Stderr = os.Stdout
 		cmd.Stderr = os.Stderr
 
-		buf,err := cmd.Output()
-		if(err != nil){
+		buf, err := cmd.Output()
+		if (err != nil) {
 			fmt.Println(err)
 		}
 		fmt.Println("Result: %s", buf)
 		//**********
 
 		//查找是否在进程中存在该程序
-		s := *(*string)(unsafe.Pointer(buf))
+		s := byteString(&buf)
 		fmt.Println(s)
 		rs := false
 		//rs := strings.Contains(buf,v.Svs[i].CronName)
-		if(rs == true){
+		if (rs == true) {
 			//此次不执行
 			fmt.Println("The process is running now")
 			time.Sleep(TIMESLEEPINTERVAL * time.Second)
 			continue
-		}else{
+		} else {
 			//继续执行下去
-			runCmd := exec.Command(v.Svs[i].CronBash, v.Svs[i].CronPath+v.Svs[i].CronName)
+			runCmd := exec.Command(v.Svs[i].CronBash, v.Svs[i].CronPath + v.Svs[i].CronName)
 			runCmd.Stderr = os.Stdout
 			runCmd.Stderr = os.Stderr
-			buf,err := runCmd.Output()
-			if(err != nil){
+			buf, err := runCmd.Output()
+			if (err != nil) {
 				fmt.Println(err)
 			}
 			fmt.Fprintf(os.Stdout, "Result: %s", buf)
@@ -133,4 +134,13 @@ func main() {
 		fmt.Fprintf(os.Stdout, "Result: %s", buf)
 		time.Sleep(50 * time.Second)
 	}*/
+}
+
+func byteString(p []byte) string {
+	for i := 0; i < len(p); i++ {
+		if p[i] == 0 {
+			return string(p[0:i])
+		}
+	}
+	return string(p)
 }
