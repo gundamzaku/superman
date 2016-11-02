@@ -9,6 +9,7 @@ import (
 	"time"
 	"regexp"
 	"os/exec"
+	"strings"
 )
 
 type Recurlyservers struct {
@@ -69,7 +70,7 @@ func main() {
 			time.Sleep(TIMESLEEPINTERVAL * time.Second)
 			continue
 		}
-
+		fmt.Println("regexp is pass")
 		//**********
 		cmd:= exec.Command("/bin/sh", "-c",`ps -ef |grep -v "grep" |grep "`+v.Svs[i].CronName+`"`)
 		cmd.Stderr = os.Stdout
@@ -79,12 +80,14 @@ func main() {
 		if(err != nil){
 			fmt.Println(err)
 		}
-		fmt.Fprintf(os.Stdout, "Result: %s", buf)
+		fmt.Println("Result: %s", buf)
 		//**********
 
 		//查找是否在进程中存在该程序
-		/*
-		rs := strings.Contains(buf,v.Svs[i].CronName)
+		s := *(*string)(unsafe.Pointer(buf))
+		fmt.Println(s)
+		rs = false		
+		//rs := strings.Contains(buf,v.Svs[i].CronName)
 		if(rs == true){
 			//此次不执行
 			fmt.Println("The process is running now")
@@ -101,7 +104,7 @@ func main() {
 			}
 			fmt.Fprintf(os.Stdout, "Result: %s", buf)
 			time.Sleep(50 * time.Second)
-		}*/
+		}
 	}
 
 	/*
