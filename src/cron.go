@@ -9,7 +9,6 @@ import (
 	"time"
 	"regexp"
 	"os/exec"
-	"unsafe"
 )
 
 type Recurlyservers struct {
@@ -85,7 +84,7 @@ func main() {
 		//**********
 
 		//查找是否在进程中存在该程序
-		s := byteString(&buf)
+		s := byteString(buf)
 		fmt.Println(s)
 		rs := false
 		//rs := strings.Contains(buf,v.Svs[i].CronName)
