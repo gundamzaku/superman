@@ -124,20 +124,17 @@ func (cron *Cron) Run() {
 func (cron *Cron) RunProcess(i int){
 	//继续执行下去
 	cron.Show(1, "exec: %s %s", cron.view.Cron[i].CronPath + cron.view.Cron[i].CronName,cron.view.Cron[i].CronParam)
-	runCmd := exec.Command(cron.view.Cron[i].CronBash, cron.view.Cron[i].CronPath + cron.view.Cron[i].CronName,cron.view.Cron[i].CronParam)
-	var b bytes.Buffer
-	runCmd.Stdout = &b
-	go runCmd.Start()	//这个是表示不阻塞的，还有阻塞的，用run()
-	/*
+	runCmd := exec.Command(cron.view.Cron[i].CronBash, cron.view.Cron[i].CronPath + cron.view.Cron[i].CronName,cron.view.Cron[i].CronParam,">>cron.txt &")
+
 	runCmd.Stderr = os.Stdout
 	runCmd.Stderr = os.Stderr
 	runCmd.Start()	//这个是表示不阻塞的，还有阻塞的，用run()
 	buf, err := runCmd.Output()
 	if (err != nil) {
 		cron.Show(4,"%s",err)
-	}*/
+	}
 	//runCmd.Wait()
-	//cron.Show(1,"Result: %s", buf)
+	cron.Show(1,"Result: %s", buf)
 	//fmt.Fprintf(os.Stdout, "Result: %s", buf)
 }
 
