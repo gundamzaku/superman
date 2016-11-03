@@ -119,7 +119,7 @@ func main() {
 					runCmd := exec.Command(v.Svs[i].CronBash, v.Svs[i].CronPath + v.Svs[i].CronName+"&")
 					runCmd.Stderr = os.Stdout
 					runCmd.Stderr = os.Stderr
-					_, err := runCmd.Output()
+					buf, err := runCmd.Output()
 					if (err != nil) {
 						show(4,"%s",err)
 					}
