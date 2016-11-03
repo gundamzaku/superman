@@ -89,11 +89,10 @@ func main() {
 				mContainer[v.Svs[i].CronId] += v.Svs[i].CronInterval
 				show(2, "delay runtime to %d", mContainer[v.Svs[i].CronId])
 			}
-
 			show(1, "regular expression have done,pass")
 			var buf []byte = nil
 			if runtime.GOOS != "windows" {
-				cmd := exec.Command("/bin/sh", "-c", `ps -ef |grep -v "grep" |grep "` + v.Svs[i].CronName + `"`)
+				cmd := exec.Command("/bin/sh", "-c", `ps -ef |grep -v "grep" |grep "` + v.Svs[i].CronName + ` test"`)
 				cmd.Stderr = os.Stdout
 				cmd.Stderr = os.Stderr
 
@@ -105,7 +104,6 @@ func main() {
 			}
 			//查找是否在进程中存在该程序
 			s := byteString(buf)
-			fmt.Println(s)
 			rs := strings.Contains(s, v.Svs[i].CronName)
 			if (rs == true) {
 				//此次不执行
@@ -116,7 +114,7 @@ func main() {
 				if runtime.GOOS != "windows" {
 					//继续执行下去
 					show(1, "exec: %s", v.Svs[i].CronPath + v.Svs[i].CronName)
-					runCmd := exec.Command(v.Svs[i].CronBash, v.Svs[i].CronPath + v.Svs[i].CronName)
+					runCmd := exec.Command(v.Svs[i].CronBash, v.Svs[i].CronPath + v.Svs[i].CronName,"test")
 					runCmd.Stderr = os.Stdout
 					runCmd.Stderr = os.Stderr
 					runCmd.Start()
