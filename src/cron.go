@@ -124,7 +124,25 @@ func (cron *Cron) RunProcess(i int){
 	//继续执行下去
 	cron.Show(1, "exec: %s %s", cron.view.Cron[i].CronPath + cron.view.Cron[i].CronName,cron.view.Cron[i].CronParam)
 	//runCmd := exec.Command(cron.view.Cron[i].CronBash, cron.view.Cron[i].CronPath + cron.view.Cron[i].CronName,cron.view.Cron[i].CronParam,">>/tmp/cron.txt &")
-	runCmd := exec.Command("bash","-c",cron.view.Cron[i].CronBash+" "+cron.view.Cron[i].CronPath + cron.view.Cron[i].CronName+" "+cron.view.Cron[i].CronParam+" >>/tmp/cron.txt &")
+	/*
+	找了好久，才找到将linux命令转入后台的操作
+	还有一种做法：把cmd命令换成sh或者bash命令来启动一个控制台程序
+	func main() {
+		in := bytes.NewBuffer(nil)
+		cmd := exec.Command("sh")
+		cmd.Stdin = in
+		go func() {
+			in.WriteString("echo hello world > test.txt\n")
+			in.WriteString("exit\n")
+		}()
+		if err := cmd.Run(); err != nil {
+			fmt.Println(err)
+			return
+		}
+	}
+	*/
+
+	runCmd := exec.Command("bash","-c",cron.view.Cron[i].CronBash+" "+cron.view.Cron[i].CronPath + cron.view.Cron[i].CronName+" "+cron.view.Cron[i].CronParam+" &")
 	runCmd.Stderr = os.Stdout
 	runCmd.Stderr = os.Stderr
 	runCmd.Start()	//这个是表示不阻塞的，还有阻塞的，用run()
