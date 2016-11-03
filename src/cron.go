@@ -91,17 +91,17 @@ func main() {
 			}
 
 			show(1, "regular expression have done,pass")
-
+			var buf []byte = nil
 			if runtime.GOOS != "windows" {
 				cmd := exec.Command("/bin/sh", "-c", `ps -ef |grep -v "grep" |grep "` + v.Svs[i].CronName + `"`)
 				cmd.Stderr = os.Stdout
 				cmd.Stderr = os.Stderr
 
-				buf, err := cmd.Output()
+				buf, err = cmd.Output()
 				if (err != nil) {
 					show(4, "%s",err)
 				}
-				show(1, "Result1: %s", buf)
+				//show(1, "Result1: %s", buf)
 			}
 			fmt.Println(buf)
 			//查找是否在进程中存在该程序
