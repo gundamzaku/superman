@@ -106,8 +106,11 @@ func main() {
 
 			//查找是否在进程中存在该程序
 			s := byteString(buf)
+			fmt.Println("查看一下")
 			fmt.Println(s)
 			rs := strings.Contains(s, v.Svs[i].CronName)
+			fmt.Println("查看一下2")
+			fmt.Println(rs)
 			if (rs == true) {
 				//此次不执行
 				show(2, "The process is running now")
