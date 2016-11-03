@@ -131,7 +131,7 @@ func (cron *Cron) RunProcess(i int){
 	if (err != nil) {
 		cron.Show(4,"%s",err)
 	}
-
+	runCmd.Wait()
 	cron.Show(1,"Result: %s", buf)
 	//fmt.Fprintf(os.Stdout, "Result: %s", buf)
 }
