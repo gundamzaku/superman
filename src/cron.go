@@ -123,8 +123,8 @@ func (cron *Cron) Run() {
 func (cron *Cron) RunProcess(i int){
 	//继续执行下去
 	cron.Show(1, "exec: %s %s", cron.view.Cron[i].CronPath + cron.view.Cron[i].CronName,cron.view.Cron[i].CronParam)
-	runCmd := exec.Command(cron.view.Cron[i].CronBash, cron.view.Cron[i].CronPath + cron.view.Cron[i].CronName,cron.view.Cron[i].CronParam,">>/tmp/cron.txt &")
-
+	//runCmd := exec.Command(cron.view.Cron[i].CronBash, cron.view.Cron[i].CronPath + cron.view.Cron[i].CronName,cron.view.Cron[i].CronParam,">>/tmp/cron.txt &")
+	runCmd := exec.Command("bash","-c",cron.view.Cron[i].CronBash+" "+cron.view.Cron[i].CronPath + cron.view.Cron[i].CronName,cron.view.Cron[i].CronParam+" >>/tmp/cron.txt &")
 	runCmd.Stderr = os.Stdout
 	runCmd.Stderr = os.Stderr
 	runCmd.Start()	//这个是表示不阻塞的，还有阻塞的，用run()
