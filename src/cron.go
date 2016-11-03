@@ -101,9 +101,9 @@ func main() {
 				if (err != nil) {
 					show(4, "%s",err)
 				}
+				fmt.Println(buf)
 				show(1, "Result1: %s", buf)
 			}
-			fmt.Println("Result2: %s", buf)
 			//查找是否在进程中存在该程序
 			s := byteString(buf)
 			fmt.Println("查看一下")
