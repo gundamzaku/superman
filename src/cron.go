@@ -106,6 +106,7 @@ func main() {
 
 			//查找是否在进程中存在该程序
 			s := byteString(buf)
+			fmt.Println(s)
 			rs := strings.Contains(s, v.Svs[i].CronName)
 			if (rs == true) {
 				//此次不执行
