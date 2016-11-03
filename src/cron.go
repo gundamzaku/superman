@@ -116,7 +116,7 @@ func main() {
 				if runtime.GOOS != "windows" {
 					//继续执行下去
 					show(1, "exec: %s", v.Svs[i].CronPath + v.Svs[i].CronName)
-					runCmd := exec.Command(v.Svs[i].CronBash, v.Svs[i].CronPath + v.Svs[i].CronName+"&")
+					runCmd := exec.Command(v.Svs[i].CronBash, v.Svs[i].CronPath + v.Svs[i].CronName,"&")
 					runCmd.Stderr = os.Stdout
 					runCmd.Stderr = os.Stderr
 					buf, err := runCmd.Output()
