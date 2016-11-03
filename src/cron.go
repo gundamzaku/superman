@@ -55,7 +55,7 @@ func main() {
 		log.Fatalf("No script need to run……")
 	}
 	for {
-
+		show(1,"\n\n\nloop______________________<<<")
 		for i := 0; i < len(v.Svs); i++ {
 
 			//CronId必须存在
