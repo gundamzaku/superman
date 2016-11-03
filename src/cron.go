@@ -55,7 +55,7 @@ func main() {
 		log.Fatalf("No script need to run……")
 	}
 	for {
-		show(1,"\n\n\nloop______________________<<<")
+		show(1,"\n\n\nloop_____________________________")
 		for i := 0; i < len(v.Svs); i++ {
 
 			//CronId必须存在
@@ -123,7 +123,7 @@ func main() {
 					if (err != nil) {
 						show(4,"%s",err)
 					}
-					//fmt.Fprintf(os.Stdout, "Result: %s", buf)
+					fmt.Fprintf(os.Stdout, "Result: %s", buf)
 				}
 				time.Sleep(TIMESLEEPINTERVAL * time.Second)
 			}
