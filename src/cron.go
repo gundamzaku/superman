@@ -29,8 +29,6 @@ type cron struct {
 	CronInterval int64    `xml:"cronInterval"`
 }
 
-var commondString string
-
 const TIMESLEEPINTERVAL = 3
 // 先声明map
 var mContainer map[string]int64
@@ -95,7 +93,7 @@ func main() {
 			show(1, "regular expression have done,pass")
 
 			if runtime.GOOS != "windows" {
-				cmd := exec.Command("/bin/sh", "-c", `ps -ef |grep -v "grep" |grep "` + v.Svs[i].CronName + `&"`)
+				cmd := exec.Command("/bin/sh", "-c", `ps -ef |grep -v "grep" |grep "` + v.Svs[i].CronName + `"`)
 				cmd.Stderr = os.Stdout
 				cmd.Stderr = os.Stderr
 
@@ -118,12 +116,12 @@ func main() {
 				if runtime.GOOS != "windows" {
 					//继续执行下去
 					show(1, "exec: %s", v.Svs[i].CronPath + v.Svs[i].CronName)
-					runCmd := exec.Command(v.Svs[i].CronBash, v.Svs[i].CronPath + v.Svs[i].CronName)
+					runCmd := exec.Command(v.Svs[i].CronBash, v.Svs[i].CronPath + v.Svs[i].CronName+"&")
 					runCmd.Stderr = os.Stdout
 					runCmd.Stderr = os.Stderr
 					_, err := runCmd.Output()
 					if (err != nil) {
-						show(4, "%s",err)
+						show(4,"%s",err)
 					}
 					//fmt.Fprintf(os.Stdout, "Result: %s", buf)
 				}
@@ -150,7 +148,7 @@ func show(status int, format string, a ...interface{}) {
 	} else if (status == 3) {
 		fmt.Print("[Warning] ")
 	} else if (status == 4) {
-		fmt.Print("[Error]    ")
+		fmt.Print("[Error]   ")
 	}
 
 	fmt.Fprintf(os.Stdout, format, a...)
