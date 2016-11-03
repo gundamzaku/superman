@@ -6,7 +6,7 @@
         <cronBash>php</cronBash>
         <cronPath>/data/www/wei/script/</cronPath>
         <cronName>test.php</cronName>
-        <cronParam>1</cronParam>
+        <cronParam>1&</cronParam>
         <cronInterval>10</cronInterval><!--执行的时间间隔-->
     </cron>
     <cron>
@@ -15,7 +15,7 @@
         <cronBash>php</cronBash>
         <cronPath>/data/www/wei/script/</cronPath>
         <cronName>test.php</cronName>
-        <cronParam>2</cronParam>
+        <cronParam>2&</cronParam>
         <cronInterval>10</cronInterval><!--执行的时间间隔-->
     </cron>
     <cron>
@@ -24,7 +24,7 @@
         <cronBash>php</cronBash>
         <cronPath>/data/www/wei/script/</cronPath>
         <cronName>test.php</cronName>
-        <cronParam>3</cronParam>
+        <cronParam>3&</cronParam>
         <cronInterval>10</cronInterval><!--执行的时间间隔-->
     </cron>
 </crons>
