@@ -11,7 +11,7 @@ import (
 	"runtime"
 	"os/exec"
 	"strings"
-	"bytes"
+
 )
 
 type Recurlyservers struct {
