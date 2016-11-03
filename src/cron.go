@@ -26,6 +26,7 @@ type cron struct {
 	CronBash     string   `xml:"cronBash"`
 	CronPath     string   `xml:"cronPath"`
 	CronName     string   `xml:"cronName"`
+	CronParam    string   `xml:"cronParam"`
 	CronInterval int64    `xml:"cronInterval"`
 }
 
@@ -92,7 +93,7 @@ func main() {
 			show(1, "regular expression have done,pass")
 			var buf []byte = nil
 			if runtime.GOOS != "windows" {
-				cmd := exec.Command("/bin/sh", "-c", `ps -ef |grep -v "grep" |grep "` + v.Svs[i].CronName + ` test"`)
+				cmd := exec.Command("/bin/sh", "-c", `ps -ef |grep -v "grep" |grep "` + v.Svs[i].CronName + ` `+v.Svs[i].CronParam+`"`)
 				cmd.Stderr = os.Stdout
 				cmd.Stderr = os.Stderr
 
@@ -114,7 +115,7 @@ func main() {
 				if runtime.GOOS != "windows" {
 					//继续执行下去
 					show(1, "exec: %s", v.Svs[i].CronPath + v.Svs[i].CronName)
-					runCmd := exec.Command(v.Svs[i].CronBash, v.Svs[i].CronPath + v.Svs[i].CronName,"test")
+					runCmd := exec.Command(v.Svs[i].CronBash, v.Svs[i].CronPath + v.Svs[i].CronName,v.Svs[i].CronParam)
 					runCmd.Stderr = os.Stdout
 					runCmd.Stderr = os.Stderr
 					runCmd.Start()

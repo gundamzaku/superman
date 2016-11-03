@@ -6,6 +6,7 @@
         <cronBash>php</cronBash>
         <cronPath>/data/www/wei/script/</cronPath>
         <cronName>batch_qmfx_order.php</cronName>
+        <cronParam>1</cronParam>
         <cronInterval>10</cronInterval><!--执行的时间间隔-->
     </cron>
 </crons>
